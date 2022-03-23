@@ -1,0 +1,687 @@
+data:text/html,<!doctype html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.bootstrap.min.css">
+</head>
+<body>
+<style>
+.editable{
+  
+}
+.editor{
+    border-style:none;
+}
+body{
+  font-family: Arial, sans-serif;
+}
+.table{
+  width: 100%;
+  thead{
+    th{
+      padding: 10px 10px;
+      background: #00adee;
+      font-size: 15px;
+      text-transform: uppercase;
+      vertical-align: top;
+      color: #1D4A5A;
+      font-weight: normal;
+      text-align: left;
+    }
+  }
+  tbody{
+    tr{
+      td{
+        padding: 10px;
+        background: #f2f2f2;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.add, .edit, .save, .delete{
+  outline: none;
+  background: none;
+  border: none;
+}
+
+.edit, .save, .delete{
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+.add{
+  float: right;
+  background-color:grey;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 0;
+  padding: 3px 5px;
+  cursor: pointer;
+  
+  &:hover{
+    background: #ffffff;
+    color: #00adee;
+  }
+}
+
+.save{
+  display: none;
+  background: #32AD60;
+  color: #ffffff;
+  
+  &:hover{
+    background: darken(#32AD60, 10%);
+  }
+}
+
+.edit{
+  background: #2199e8;
+  color: #ffffff;
+  
+  &:hover{
+    background: darken(#2199e8, 10%);
+  }
+}
+
+.delete{
+  background: #EC5840;
+  color: #ffffff;
+  
+   &:hover{
+    background: darken(#EC5840, 10%);
+  }
+}
+
+</style>
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Client</th>
+			<th>Subacct</th>
+			<th>Asset ID</th>
+			<th>Client Inventory#</th>
+			<th>Status</th>
+                                <th>Location</th>
+                                <th>Dims</th>
+                                <th>Artist</th>
+                                <th>Title</th>
+                               <th>Actions <button class="add">Add new</button></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>Alphabet puzzle</td>
+			<td>2016/01/15</td>
+			<td>Done</td>
+			<td>Done</td>
+<td>1</td>
+			<td>Alphabet puzzle</td>
+			<td>2016/01/15</td>
+			<td>Done</td>
+    <td>
+        <button class="save">Save</button>
+        <button class="edit">Edit</button>
+        <button class="delete">Delete</button>
+      </td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Layout for poster</td>
+			<td>2016/01/31</td>
+			<td>Planned</td>
+			<td>Done</td>
+<td>1</td>
+			<td>Alphabet puzzle</td>
+			<td>2016/01/15</td>
+			<td>Done</td>
+    <td>
+        <button class="save">Save</button>
+        <button class="edit">Edit</button>
+        <button class="delete">Delete</button>
+      </td>
+		</tr>
+	</tbody>
+</table>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script> $(document).ready(function() {
+	// DataTable initialisation
+	var dt = $('#example').DataTable(
+		{
+			"dom": '<"dt-buttons"Bf><"clear">lirtp',
+			"paging": true,
+			"autoWidth": true,
+			"buttons": [
+				'colvis',
+				'copyHtml5'
+			],
+                              "columns": [
+    { "className": "editable" },
+    { "className": "editable" },
+    { "className": "editable" },
+    { "className": "editable" },
+    { "className": "editable" },
+    { "className": "editable" },
+    { "className": "editable" },
+    { "className": "editable" },
+    { "className": "editable" },
+null
+  ]
+		}
+	);
+
+// when the mouse enters a cell, create an editor. 
+$('#example').on('click', 'td.editable', function (e) {
+  e.preventDefault();
+  if (e.target.localName != 'input') {
+    let row = e.target._DT_CellIndex.row
+    let col = e.target._DT_CellIndex.column
+    if (!e.target.children.length) {
+        e.target.innerHTML = `<input id="${row}-${col}" type="text" class="editor" value="${e.target.innerHTML}">`
+    }
+  }
+})
+
+// when the mouse exits the editor, write the data into the table and redraw
+$('#example').on('mouseleave', 'td.editable', function (e) {
+  e.preventDefault()
+  if (e.target.localName != 'input') {
+    let row = e.target._DT_CellIndex.row
+    let col = e.target._DT_CellIndex.column
+    data_table.cell(row, col).data(e.target.firstElementChild.value)
+    data_table.draw() // up to you
+  }
+  else { // forces write when there is an event delay
+    let [row, col] = e.target.id.split('-')
+    data_table.cell(Number(row), Number(col)).data(e.target.value)
+  }
+  data_table.draw()
+})
+
+$(document).on('click', '.edit', function() {
+  $(this).parent().siblings('td.data').each(function() {
+     if (e.target.localName != 'input') {
+    let row = e.target._DT_CellIndex.row
+    let col = e.target._DT_CellIndex.column
+    if (!e.target.children.length) {
+        e.target.innerHTML = `<input id="${row}-${col}" type="text" class="editor" value="${e.target.innerHTML}">`
+    }
+  }
+  });
+  
+  $(this).siblings('.save').show();
+  $(this).siblings('.delete').hide();
+  $(this).hide();
+});
+
+$(document).on('click', '.save', function() {
+  
+  $('input').each(function() {
+    var content = $(this).val();
+    $(this).html(content);
+    $(this).contents().unwrap();
+  });
+  $(this).siblings('.edit').show();
+  $(this).siblings('.delete').show();
+  $(this).hide();
+  
+});
+
+
+$(document).on('click', '.delete', function() {
+  $(this).parents('tr').remove();
+});
+var counter = 1;
+$('.add').click(function() {
+// create fields
+ dt.row.add( [
+'',
+'',
+'',
+'',
+'Done',
+'',
+'',
+'',
+'',
+''
+     ] ).draw( false );
+ 
+        counter++;
+$('#addRow').click();
+
+});
+
+});
+</script>
+</html>
+
+
+// when the mouse enters a cell, create an editor. 
+$('#example').on('click', 'td.editable', function (e) {
+  e.preventDefault();
+  if (e.target.localName != 'input') {
+    let row = e.target._DT_CellIndex.row
+    let col = e.target._DT_CellIndex.column
+    if (!e.target.children.length) {
+        e.target.innerHTML = `<input id="${row}-${col}" type="text" class="editor" value="${e.target.innerHTML}">`
+    }
+  }
+})
+
+// when the mouse exits the editor, write the data into the table and redraw
+$('#example').on('mouseleave', 'td.editable', function (e) {
+  e.preventDefault()
+  if (e.target.localName != 'input') {
+    let row = e.target._DT_CellIndex.row
+    let col = e.target._DT_CellIndex.column
+    data_table.cell(row, col).data(e.target.firstElementChild.value)
+    data_table.draw() // up to you
+  }
+  else { // forces write when there is an event delay
+    let [row, col] = e.target.id.split('-')
+    data_table.cell(Number(row), Number(col)).data(e.target.value)
+  }
+  data_table.draw()
+})
+
+<tr>
+    <td>1</td>
+    <td>Alphabet puzzle</td>
+    <td>2016/01/15</td>
+    <td>Done</td>
+    <td>New</td>
+    <td>1</td>
+    <td>Alphabet puzzle</td>
+    <td>2016/01/15</td>
+    <td>2016/01/15</td>
+    <td>2016/01/15</td>
+    <td>Done</td>
+    <td>
+        <button class="save">Save</button>
+        <button class="edit">Edit</button>
+        <button class="delete">Delete</button>
+    </td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Layout for poster</td>
+    <td>2016/01/31</td>
+    <td>Planned</td>
+    <td>Done</td>
+<td>1</td>
+    <td>Alphabet puzzle</td>
+<td>1</td>
+    <td>Alphabet puzzle</td>
+    <td>2016/01/15</td>
+    <td>Done</td>
+<td>
+<button class="save">Save</button>
+<button class="edit">Edit</button>
+<button class="delete">Delete</button>
+</td>
+
+
+'<tr><td class="Newdata"></td><td class="data"></td><td class="data"></td><td><button class="save">Save</button><button class="edit">Edit</button> <button class="delete">Delete</button></td></tr>'
+
+<tr>
+
+    <td>WHITE FIRE</td> 			<td></td> 			<td>A0000-13</td> 			<td>GTO-350-#18</td> 			<td>IN</td>              <td>35TH-322</td> 			<td>70</td> 			<td>48</td> 			<td>2</td>              <td>PRINCE</td>              <td></td>       <td>         <button class='save'>Save</button>         <button class='edit'>Edit</button>         <button class='delete'>Delete</button>       </td> </tr>
+<tr> 			<td>WHITE FIRE</td> 			<td></td> 			<td>A0000-14</td> 			<td>GTO-350-#16</td> 			<td>IN</td>              <td>35TH-201</td> 			<td>70</td> 			<td>48</td> 			<td>2</td>              <td>PRINCE</td>              <td></td>       <td>         <button class='save'>Save</button>         <button class='edit'>Edit</button>         <button class='delete'>Delete</button>       </td> </tr>
+
+$(document).ready(function() {
+	// DataTable initialisation
+	window.dt = $('#example').DataTable(
+		{
+			"dom": '<"dt-buttons"Bf><"clear">lirtp',
+			"paging": true,
+                                "pageLength": 25,
+			"autoWidth": true,
+			"buttons": [
+				'colvis',
+				'copyHtml5',
+{
+                text: 'Add New Asset',
+                action: function ( e, dt, node, config ) {
+                   var param = {
+          action: 'New',
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+                }
+            }
+			]
+		}
+	);
+
+$(document).on('click', '.delete', function() {
+  //delete in FM
+  var id = $(this).closest('tr').find('#assetID').text();
+console.log(id);
+var param = {
+          action: 'Delete',
+          id: id
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+
+  $(this).parents('tr').remove();
+});
+
+//add dropdowns
+$('#dropdownClient').each(function() {
+        var parent = $(this).parent();
+            text   = **VL_Client**;
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='clients'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+
+$('#dropdownPacking').each(function() {
+        var parent = $(this).parent();
+            text   = **VL_Packing**;
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='packing'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+
+//event listener
+
+$(document).on('blur', '.editor', function() {
+var id = $(this).closest('tr').find('#assetID').text();
+var param = {
+          action: 'Edit',
+          data: this.innerHTML,
+          row: this.closest('tr').innerHTML,
+          id: id
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+  });
+});
+
+function addRow(row){
+  console.log(row);
+  dt.row.add($(row)).draw();
+}
+
+//older
+
+// DataTable initialisation
+	var dt = $('#example').DataTable(
+		{
+			"dom": '<"dt-buttons"Bf><"clear">lirtp',
+			"paging": true,
+                                "pageLength": 25,
+			"autoWidth": true,
+			"buttons": [
+				'colvis',
+				'copyHtml5',
+{
+                text: 'Add New Asset',
+                action: function ( e, dt, node, config ) {
+                   var param = {
+          action: 'New',
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+
+                }
+            }
+			]
+		}
+	);
+
+$(document).on('click', '.delete', function() {
+  //delete in FM
+  var id = $(this).closest('tr').find('#assetID').text();
+console.log(id);
+var param = {
+          action: 'Delete',
+          id: id
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+
+  $(this).parents('tr').remove();
+});
+
+//event listener
+
+$(document).on('blur', '.editor', function() {
+var id = $(this).closest('tr').find('#assetID').text();
+var param = {
+          action: 'Edit',
+          data: this.innerHTML,
+          row: this.closest('tr').innerHTML,
+          id: id
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+});
+
+function addRow(row){
+     console.log(row);
+     dt.row.add($(row)).draw();
+}
+
+$(document).ready(function() {
+//add dropdowns
+$('#dropdownClient').each(function() {
+        var parent = $(this).parent();
+            text   = **VL_Client**;
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='clients'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+
+$('#dropdownPacking').each(function() {
+        var parent = $(this).parent();
+            text   = **VL_Packing**;
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='packing'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+})
+
+//dropdowns list
+
+//add dropdowns
+$('#dropdownClient').each(function() {
+        var parent = $(this).parent();
+            text   = **VL_Client**;
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='clients'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+
+$('#dropdownPacking').each(function() {
+        var parent = $(this).parent();
+            text   = **VL_Packing**;
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='packing'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+  });
+
+//LASt
+
+$(document).ready(function() {
+	// DataTable initialisation
+	window.dt = $('#example').DataTable(
+		{
+			"dom": '<"dt-buttons"Bf><"clear">lirtp',
+			"paging": true,
+                                "pageLength": 25,
+			"autoWidth": true,
+			"buttons": [
+				'colvis',
+				'copyHtml5',
+{
+                text: 'Add New Asset',
+                action: function ( e, dt, node, config ) {
+                   var param = {
+          action: 'New',
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+                }
+            }
+			]
+		}
+	);
+$(document).on('click', '.delete', function() {
+  //delete in FM
+  var id = $(this).closest('tr').find('#assetID').text();
+console.log(id);
+var param = {
+          action: 'Delete',
+          id: id
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+
+  $(this).parents('tr').remove();
+});
+
+//event listener
+$(document).on('blur', '.editor', function() {
+var id = $(this).closest('tr').find('#assetID').text();
+var param = {
+          action: 'Edit',
+          data: this.innerHTML,
+          row: this.closest('tr').innerHTML,
+          id: id
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+
+  });
+
+//add dropdowns
+$('#dropdownClient').each(function() {
+        var parent = $(this).parent();
+            text   = **VL_Client**;
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='clients'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+
+$('#dropdownPacking').each(function() {
+        var parent = $(this).parent();
+            text   = **VL_Packing**;
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='packing'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+
+});
+
+$('#dropdownPacking').each(function() {
+  $("#dropdownPacking").focus(function() {
+    alert($(this).val());
+});
+});
+
+//add dropdowns
+$('#dropdownClient').each(function() {
+        var parent = $(this).parent();
+            text   = **VL_Client**;
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='clients'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+
+function pack(){
+  console.log('here');
+  var packing=  **VL_Packing**;
+  var list = document.getElementById('dropdownPacking');
+  console.log(list);
+  dl = document.createElement('datalist');
+  dl.id = 'packing';
+  packing.forEach(function(item){
+    var option = document.createElement('option');
+    option.value = item;
+    dl.appendChild(option);
+  });
+  list.setAttribute('list', "datalist");
+}
+pack();
+
+
+
+function addRow(row){
+  console.log(row);
+  dt.row.add($(row)).draw();
+  dt.ajax.reload();
+}
+
+
+/*<td id='packing'><input list='packing' class='editor' id='dropdownPacking' value = '" & ASST_Assets::Packing & "'></input></td> */
+function pack(){
+  console.log('here');
+  var packing=  **VL_Packing**;
+  var list = document.getElementById('dropdownPacking');
+  console.log(list);
+  dl = document.createElement('datalist');
+  dl.id = 'packing';
+  packing.forEach(function(item){
+    var option = document.createElement('option');
+    option.value = item;
+    dl.appendChild(option);
+  });
+  list.appendChild(dl);
+}

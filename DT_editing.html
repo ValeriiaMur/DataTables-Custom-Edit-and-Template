@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.bootstrap.min.css">
+</head>
+<body>
+<style>
+.editable{
+  
+}
+.editor{
+    border-style:none;
+}
+body{
+  font-family: Arial, sans-serif;
+}
+.table{
+  width: 100%;
+  thead{
+    th{
+      padding: 10px 10px;
+      background: #00adee;
+      font-size: 15px;
+      text-transform: uppercase;
+      vertical-align: top;
+      color: #1D4A5A;
+      font-weight: normal;
+      text-align: left;
+    }
+  }
+  tbody{
+    tr{
+      td{
+        padding: 10px;
+        background: #f2f2f2;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.add, .edit, .save, .delete{
+  outline: none;
+  background: none;
+  border: none;
+}
+
+.edit, .save, .delete{
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+.add{
+  float: right;
+  background-color:grey;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 0;
+  padding: 3px 5px;
+  cursor: pointer;
+  
+  &:hover{
+    background: #ffffff;
+    color: #00adee;
+  }
+}
+
+.save{
+  display: none;
+  background: #32AD60;
+  color: #ffffff;
+  
+  &:hover{
+    background: darken(#32AD60, 10%);
+  }
+}
+
+.edit{
+  background: #2199e8;
+  color: #ffffff;
+  
+  &:hover{
+    background: darken(#2199e8, 10%);
+  }
+}
+
+.delete{
+  background: #EC5840;
+  color: #ffffff;
+  
+   &:hover{
+    background: darken(#EC5840, 10%);
+  }
+}
+</style>
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Client</th>
+			<th>Subacct</th>
+			<th>Asset ID</th>
+			<th>Status</th>
+                                <th>Location</th>
+                                <th>H</th>
+                                <th>L</th>
+                                <th>W</th>
+                                <th>Artist</th>
+                                <th>Title</th>
+                                <th>Packing</th>
+			<th>Client Inventory#</th>
+                               <th>Actions</th>
+		</tr>
+	</thead>
+<tr>              <td id='client'>Gavin Brown's Enterprise</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0053-27</td> 			<td>OUT</td>              <td></td> 			<td id='h'><div contenteditable class='editor'>17</div></td> 			<td id='l'><div contenteditable class='editor'>26</div></td> 			<td id= w'><div contenteditable class='editor'>24</div></td>              <td id='artist'><div contenteditable class='editor'>PRUITT</div></td>              <td id='title'><div contenteditable class='editor'>CARDBOARD MONSTER: GAVIN 2/2</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'BUBBLE'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>GBE-RP-613.2</div></td>                <td></td> </tr><tr>              <td id='client'>Gavin Brown's Enterprise</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0056-78</td> 			<td>OUT</td>              <td></td> 			<td id='h'><div contenteditable class='editor'>32</div></td> 			<td id='l'><div contenteditable class='editor'>29</div></td> 			<td id= w'><div contenteditable class='editor'>38</div></td>              <td id='artist'><div contenteditable class='editor'>PRUITT</div></td>              <td id='title'><div contenteditable class='editor'>CARDBOARD MONSTER: GAVIN 1/2</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'SOFT'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>GBE-RP-613.1</div></td>                <td></td> </tr><tr>              <td id='client'>Gavin Brown's Enterprise</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0065-67</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>36</div></td> 			<td id='l'><div contenteditable class='editor'>79</div></td> 			<td id= w'><div contenteditable class='editor'>36</div></td>              <td id='artist'><div contenteditable class='editor'>ROB PRUITT</div></td>              <td id='title'><div contenteditable class='editor'>CARDBOARD MONSTER: JONATHAN, 2010</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'PALLET / BLANKET WRAPPED'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>RP-608</div></td>                <td></td> </tr><tr>              <td id='client'>Gavin Brown's Enterprise</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0065-68</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>36</div></td> 			<td id='l'><div contenteditable class='editor'>79</div></td> 			<td id= w'><div contenteditable class='editor'>36</div></td>              <td id='artist'><div contenteditable class='editor'>ROB PRUITT</div></td>              <td id='title'><div contenteditable class='editor'>CARDBOARD MONSTER: MASSIMO, 2010</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'PALLET / BLANKET WRAPPED'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>RP-616</div></td>                <td></td> </tr><tr>              <td id='client'>Gavin Brown's Enterprise</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0065-69</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>36</div></td> 			<td id='l'><div contenteditable class='editor'>79</div></td> 			<td id= w'><div contenteditable class='editor'>36</div></td>              <td id='artist'><div contenteditable class='editor'>ROB PRUITT</div></td>              <td id='title'><div contenteditable class='editor'>CARDBOARD MONSTER: PIOTR, 2010</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'PALLET / BLANKET WRAPPED'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>RP-612</div></td>                <td></td> </tr><tr>              <td id='client'>Gavin Brown's Enterprise</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0065-73</td> 			<td>In</td>              <td>UNION-K</td> 			<td id='h'><div contenteditable class='editor'>40</div></td> 			<td id='l'><div contenteditable class='editor'>34</div></td> 			<td id= w'><div contenteditable class='editor'>77</div></td>              <td id='artist'><div contenteditable class='editor'>ROB PRUITT</div></td>              <td id='title'><div contenteditable class='editor'>CARDBOARD MONSTER: GAVIN, 2010</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'CRATE'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>RP-613</div></td>                <td></td> </tr><tr>              <td id='client'>SIMON LEE</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0091-02</td> 			<td>T</td>              <td></td> 			<td id='h'><div contenteditable class='editor'>26</div></td> 			<td id='l'><div contenteditable class='editor'>33</div></td> 			<td id= w'><div contenteditable class='editor'>2</div></td>              <td id='artist'><div contenteditable class='editor'>GORDON</div></td>              <td id='title'><div contenteditable class='editor'>DESTROY ALL MONSTERS</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'BOX'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>SLG-KG-09944</div></td>                <td></td> </tr><tr>              <td id='client'>Gavin Brown's Enterprise</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0289-55</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>33</div></td> 			<td id='l'><div contenteditable class='editor'>29</div></td> 			<td id= w'><div contenteditable class='editor'>27</div></td>              <td id='artist'><div contenteditable class='editor'>ROB PRUITT</div></td>              <td id='title'><div contenteditable class='editor'>CARDBOARD MONSTER: JONATHAN, 2010,</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'BOX'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>RP-608.2</div></td>                <td></td> </tr><tr>              <td id='client'>Gavin Brown's Enterprise</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0289-56</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>35</div></td> 			<td id='l'><div contenteditable class='editor'>27</div></td> 			<td id= w'><div contenteditable class='editor'>29</div></td>              <td id='artist'><div contenteditable class='editor'>ROB PRUITT</div></td>              <td id='title'><div contenteditable class='editor'>CARDBOARD MONSTER: JONATHAN, 2010</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'BOX'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>RP-616.2</div></td>                <td></td> </tr><tr>              <td id='client'>Gavin Brown's Enterprise</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0289-57</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>25</div></td> 			<td id='l'><div contenteditable class='editor'>27</div></td> 			<td id= w'><div contenteditable class='editor'>29</div></td>              <td id='artist'><div contenteditable class='editor'>ROB PRUITT</div></td>              <td id='title'><div contenteditable class='editor'>CARDBOARD MONSTER: PIOTR, 2010</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'BOX'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>RP-612.2</div></td>                <td></td> </tr><tr>              <td id='client'>New York Gallery</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0383-44</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>34</div></td> 			<td id='l'><div contenteditable class='editor'>25</div></td> 			<td id= w'><div contenteditable class='editor'>25</div></td>              <td id='artist'><div contenteditable class='editor'>ARSHAM</div></td>              <td id='title'><div contenteditable class='editor'>Bronze Eroded Monstera Plant</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'CB BOX'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>NYG-54397</div></td>                <td></td> </tr><tr>              <td id='client'>New York Gallery</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0424-49</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>31</div></td> 			<td id='l'><div contenteditable class='editor'>17</div></td> 			<td id= w'><div contenteditable class='editor'>17</div></td>              <td id='artist'><div contenteditable class='editor'>OTANI</div></td>              <td id='title'><div contenteditable class='editor'>STANDING MONSTER</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'BOX'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>NYG-56563</div></td>                <td></td> </tr><tr>              <td id='client'>Karyn Lovegrove Art Advisory</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0431-79</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>24</div></td> 			<td id='l'><div contenteditable class='editor'>21</div></td> 			<td id= w'><div contenteditable class='editor'>3</div></td>              <td id='artist'><div contenteditable class='editor'>Jonas Wood</div></td>              <td id='title'><div contenteditable class='editor'>Frimkess Still Life with Colombian Monstera</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'SLIPCASE'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>KLAA-WOOD-2</div></td>                <td></td> </tr><tr>              <td id='client'>Asher Edelman</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0479-03</td> 			<td>^</td>              <td>MQT CT CC-B3</td> 			<td id='h'><div contenteditable class='editor'>12</div></td> 			<td id='l'><div contenteditable class='editor'>12</div></td> 			<td id= w'><div contenteditable class='editor'>1</div></td>              <td id='artist'><div contenteditable class='editor'>Winter, Christopher</div></td>              <td id='title'><div contenteditable class='editor'>Little Monster</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'BAG'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>EDEART-CW-091</div></td>                <td></td> </tr><tr>              <td id='client'>Gladstone Gallery</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0494-62</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>88</div></td> 			<td id='l'><div contenteditable class='editor'>51</div></td> 			<td id= w'><div contenteditable class='editor'>3</div></td>              <td id='artist'><div contenteditable class='editor'>PRINCE</div></td>              <td id='title'><div contenteditable class='editor'>Monster Horror Western</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'SLIPCASE'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>BGG-RP-125</div></td>                <td></td> </tr><tr>              <td id='client'>Gladstone Gallery</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0494-76</td> 			<td>IN</td>              <td>35TH-PH-RR-301</td> 			<td id='h'><div contenteditable class='editor'>88</div></td> 			<td id='l'><div contenteditable class='editor'>53</div></td> 			<td id= w'><div contenteditable class='editor'>34</div></td>              <td id='artist'><div contenteditable class='editor'>PRINCE</div></td>              <td id='title'><div contenteditable class='editor'>Untitled (Monster, Model, Mary)</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'SLIPCASE'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>BGG-RP-322</div></td>                <td></td> </tr><tr>              <td id='client'>Karyn Lovegrove Art Advisory</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0498-14</td> 			<td>IN</td>              <td>35TH-319</td> 			<td id='h'><div contenteditable class='editor'>29</div></td> 			<td id='l'><div contenteditable class='editor'>35</div></td> 			<td id= w'><div contenteditable class='editor'>3</div></td>              <td id='artist'><div contenteditable class='editor'></div></td>              <td id='title'><div contenteditable class='editor'>MT Original frame from Victor Brauner Monster Surrealiste</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = ''></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>KLAA-BRAUNER-MT-FRAME-1</div></td>                <td></td> </tr><tr>              <td id='client'>Gagosian Gallery</td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0525-35</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>54</div></td> 			<td id='l'><div contenteditable class='editor'>37</div></td> 			<td id= w'><div contenteditable class='editor'>4</div></td>              <td id='artist'><div contenteditable class='editor'>ROE ETHRIDGE</div></td>              <td id='title'><div contenteditable class='editor'>Cookie Monster with Cookie</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'SLIPCASE'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>ETHRI 2017.0076</div></td>                <td></td> </tr><tr>              <td id='client'>Erika Klauer </td>              <td id='& ASST_Assets::AssetID  &'></td> 			<td id='assetID'>A0586-15</td> 			<td>OUT</td>              <td>OUT</td> 			<td id='h'><div contenteditable class='editor'>20</div></td> 			<td id='l'><div contenteditable class='editor'>17</div></td> 			<td id= w'><div contenteditable class='editor'>3</div></td>              <td id='artist'><div contenteditable class='editor'>ALSOUDANI</div></td>              <td id='title'><div contenteditable class='editor'>(drawing -looks like a monster, signed on lower right, pencil, grey frame)</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'BUBBLE'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>EKL-004</div></td>                <td></td> </tr><tr>              <td id='client'>Dietl International</td>              <td id='& ASST_Assets::AssetID  &'>DTL-425440 </td> 			<td id='assetID'>A0592-55</td> 			<td>New</td>              <td></td> 			<td id='h'><div contenteditable class='editor'>H</div></td> 			<td id='l'><div contenteditable class='editor'>L</div></td> 			<td id= w'><div contenteditable class='editor'>W</div></td>              <td id='artist'><div contenteditable class='editor'>my artist</div></td>              <td id='title'><div contenteditable class='editor'>Monster test</div></td>                <td><input list='packing' class='editor' id='dropdownPacking' value = 'BIN'></input></td>              <td id='clientAssetID'><div contenteditable class='editor'>123clientnum</div></td>                <td></td> </tr>
+
+</table>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script>
+$(document).ready(function() {
+	// DataTable initialisation
+	window.dt = $('#example').DataTable(
+		{
+			"dom": '<"dt-buttons"Bf><"clear">lirtp',
+			"paging": true,
+                                "pageLength": 25,
+			"autoWidth": true,
+			"buttons": [
+				'colvis',
+				'copyHtml5',
+{
+                text: 'Add New Asset',
+                action: function ( e, dt, node, config ) {
+                   var param = {
+          action: 'New',
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+                }
+            }
+			]
+		}
+	);
+$(document).on('click', '.delete', function() {
+  //delete in FM
+  var id = $(this).closest('tr').find('#assetID').text();
+console.log(id);
+var param = {
+          action: 'Delete',
+          id: id
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+
+  $(this).parents('tr').remove();
+});
+
+//event listener
+$(document).on('blur', '.editor', function() {
+var id = $(this).closest('tr').find('#assetID').text();
+dropClient = $(this).closest('tr').find('#dropdownClient').val();
+dropPacking = $(this).closest('tr').find('#dropdownPacking').val();
+
+var param = {
+          action: 'Edit',
+          data: this.innerHTML,
+          row: this.closest('tr').innerHTML,
+          dropClient:dropClient,
+          dropPacking:dropPacking,
+          id: id
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+
+  });
+
+$('#dropdownPacking').each(function() {
+        var parent = $(this).parent();
+            text   = ["BAG","BIN","BLANKET","BLANKET/SHRINK","BOX","BANKER BOX","BUBBLE","BUCKET","BUNDLED METAL","C-BIN","C-BOARD","CART","CASE","CB","CLAMSHELL BOX","COTTON FLANNEL","CRATE","ENVELOPE","FC BOX","FLAT FILE","FLIGHTCASE","FOAM","FOAMCORE","FOLDED","FRAME","GLASSINE","LIDDED SHADOWBOX","MICRO","MT CRATE","MT PACKING","MT SLIPCASE","MT T-FRAME","MULTIPLE","NONE","PACKING","PALLET","PAPER","PLASTIC BOX","PLY CRATE","POLY","PORTFOLIO","ROKBOX","ROLL","SHADOWBOX","SHRINK","SLAT CRATE","SLIPCASE","SOFT","STRETCHER BARS","STRONG BOX","T-FRAME","TOOL BOX","TRAY","TRIANGULAR BOX","TUBE","TYVEK","ULD","WOOD TRAVEL BOX","PLASTIC POUCH","FOAM/SHRINK","L FRAME"];
+            select = function() {
+                var returnstring = '';
+                text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+                return "<datalist id='packing'>" + returnstring + "</datalist>";
+            }();
+        $(this).empty();
+       parent.append(select);
+    });
+});
+
+function show_client(){
+$('#dropdownClient').each(function() {
+    var parent = $(this).parent();
+        text   = [" Alan and Susan Patricof"," Johannes Schäfer"," MoMA Design Store ","'21' Club Inc.","10 Corso Como | The Howard Hughes Corporation","303 Gallery","335 MADISON LLC","47 Canal","7G Capital Partners, LP","9 Orchard Street Partners, LLC","9/11 Memorial & Museum","A River Runs Pruitt","A Z Art Framing","A. Alfred Taubman Restated Revocable Trust","A&E Real Estate","A2 Art Storage","Aaron Parach Productions","Abigail Burrata","Acquavella Galleries","Acumen Fine Art Logistics","Adam Brown","Adam Kimmel","ADAM ONEAL","Adam Pendleton Studio","Addison Fine Art","Addison Gallery of American Art","Adjaye Associates","Adler Designs","Adriana Biasi","Aequitas","AFACT, LLC","AH Arts LLC","Ahmet Ertug","AIGA, the professional association for design","Aiston Fine Art Services ","AL STUDIO LLC","Alan Ginsberg","Alan Ritter","Albert Laboz","Albright-Knox Art Gallery","Alchemy Paintworks","Aleksandra and Andrew McCormack","Ales Ortuzar Gallery","Alessandro d'Ansembourg","Alex Katz Foundation","Alex Katz Studio ","Alexander Berggruen","Alexander DiPersia","Alexander Doherty Design","Alexander Gray Associates","Alexander S. Onassis Public Benefit Foundation, Inc. USA","Alexandra Shapiro and Adam Aron","Alexandre Gallery","Alexia Ghadamian","Alice and Tom Tisch","Almine Rech Gallery","Alvarez Conservation","Alyssa Kapito Interiors","Amalia Dayan LLC","Amann Conservation","Ambera Wellman Studio","Amena Solomon","American Museum of Natural History","Amy Bermingham ","Amy Goldman Fowler","Andera Lounibos","Andre Singer ","Andrea Frank Foundation","Andrea Pitsch","Andrea Rosen Gallery","Andrea Waala","Andrew Black","Andrew Dupee","Andrew Goffe","Andrew Heiskell","Andrew Holm","Andrew Kreps Gallery","Andrew McKechnie","Andrew Medjuck","Andrew Van Etten","Andrew Zuckerman","Andy Epstein","Angela Timashev","Anita Katz","Anita Simons ","Ann Chen","Ann Marie Foss","Anna Weyant","Anna Zaoui","Anne Bruder Art","Anne Chandler Bass","Anne Dias","ANR Transport","Anthony Akinbola","Anton Kern Gallery","Antonino Buzzetta Design","Applebaum & Himmelstein ","Arader Galleries ","Arcangel Studio Inc.","ARCIS","Area9 Lyceum Inc","Ariel Meyerowitz Art Advisory","ARIEL'S LEGACY","Arlene Shechet Studio","Arrow Fine Art Services ","Art Agency Partners ","Art Confidant ","Art Conservation Group","Art Conservation Solutions LLC","Art Crating ","Art Frankly","Art Gallery of Ontario","Art Handlers, LTD","Art Institute of Chicago","Art Matic LLC","Art of Our Time","Art Peritus","Art Shipping International","art_works","ARTA","Artcore Fine Art ","Artex ","Arthur Becker ","Arthur Fleischer","Artworks San Diego ","Aryeh Grunewald","Asher Edelman","Ashley Klein","Asia Gallery Limited","Asian Art Museum","ASP Fine Art Services ","Atelier 4","Atelier FAS","Atlas Capital Group","Aurora Farewell Architects","Avant Arte","Avi Spira ","Avo Samuelian","AWG Art Advisory","AYN Foundation (Friedrich Moeller)","Balanz Contemporary Art Collection","Baobab Frames ","Barbara and David Roux","Barbara Leland","Bard Graduate Center","Bark Frameworks","Barrie Glabman","Bas Bremer Studio","Bauer Collection","Bay Crane","Beatrice Monti della Corte Rezzori","Beatrice Nessen","Becca Kahn Bloch","Ben Varadi","Benjamin Provo","Berry Campbell ","Bert Hedaya","Bespoke Fashion","Bethany Menzies","Betsy Senior Fine Art","Bill C Gautreaux","Bill Holdonak","Blaffer Art Museum","Blain Southern","Blouin Division","Blum & Poe","Bob Emery ","Bonhams","Borough of Manhattan Community College","Bortolami","BOS (Logan International)","Boston University Art Galleries","Bourlet Art Logistics","Bowdoin College Museum of Art","Boxart ","Bradfield & Tobin","Bradley Stephens Design Group","Brendan Iribe","Brennan & Griffin","Brenner West Capital Partners","Brent Kinetz","Brett Kinetz Free","Brian Schatz","Bridget and Michael Capasso","Bridgewater","Brink’s Global Services USA, Inc.","Broadway Gallery","Brookfield Properties","Brooklyn Academy of Music (BAM)","Brooklyn Children's Museum","Brooklyn Museum of Art","Bruce Museum","Bryan Graybill","Bryce McClure","Business Relocation Services, Inc.","Cadogan Tate","Cahoon Museum of American Art","Calder Foundation","Caleb Cain Marcus","Campoli Presti ","Canada","Carey Cameron","Cargolution","Carl Kostyál","Carmelo Citera ‭Printer","Carmen Herrera Studio","Carnegie Museum of Art","Carol Rahr","Carol Sapirstein","Carole Robinson","Caroline Owens","Casey Kaplan","Castelli Gallery","Casterline Goodman Gallery","Catherine and Greg Crockett","Cayre Art Group","Cedric Meeschaert","Centre National d'Art et de culture Georges Pompidou","Cesare DeCredico","CFASS","Charles Moffett ","Charles Roth","Charlotte Ford","Cheim & Read","Chella Safra","Chelsea Frames ","Chelsea Restoration Associates","Chen Lampert Inc","Cheyney Thompson Studio ","Chrissie Shearman","Christie's","Christina Shearman Art Advisory","Christine Eng","Christine Mack","Christine Minas","Christophe Pourny ","Christophe Steinmeyer / Nocturne Drive GmbH","Christopher Blackman","Christopher J Lunney","Christopher Rothko","Christopher Wolf","Chrysler Museum of Art","Chum Langhorne","CHV Arts & Services LLC","Ciaccia Levi","Citi Private Bank, Citi Bank, N.A.","Citibank","citizenM","CJ Follini","Clark Art Institute","CLAUDIO PORCEL","CLEARING ","Clifford Davis","CLODAGH","Colby College Museum of Art","Colleen Hess","Colnaghi Gallery Ltd","Colour Themes Limited","Company","Company (Gallery)","Concept NV","Contemporary Conservation Ltd","Cooper Hewitt","Corbett vs Dempsey","Corliss Moore","Corporate Art Group, Fidelity Real Estate Company","Corrie Mark Sandelman","Courtney Braun","Courtney Katzenstein","Craig F. Starr Gallery","Cranmer Art Group LLC","Crate 88 Inc","Crateless","Crateshop // MQT Matsil","Cravath, Swaine & Moore LLP","Creative Growth Art Center","Cristina BanBan Studio","Cristina Sarto","Cromwell Art LLC","Crozier ","Crystal Bridges Museum of American Art","Cub Craft LLC","Cueto Art Advisory Corp.","Currier Museum of Art","Curtis Hughes","Cyril Lim","DAG","DAG Modern","Dakota Art Services, LLC","Dallas Museum of Art","Dan Galanter & Ashley Avignone ","Dana Strong","Daniel Humm","Daniella Luxembourg","Dara Stern","Daria K Conservation LLC","David and Amy Abrams","David Benrimon Fine Art LLC","David Berger","David Fox","David Hammons ","David Kordansky Gallery ","David Lewis Gallery","David Lipman","David Nolan Gallery ","David Richard Gallery","David Ross","David Rudenstine","David Salle Studio","David Zwirner","Day & Meyer","DC Moore Gallery","DD ALLEN DESIGN","Debbie Landau","Deborah Remington Charitable Trust for the Visual Arts","Debra Bosniak Art Advisory","Delaware Freeport","Delight Dodyk","Dena M. Hardymon","Dennis Kleidon","Denver Art Museum","Des Moines Art Center","Di Donna","Dickinson Roundell Inc.","Diesel Peltz","Dietl International","Dillon Gallery","DLJ Real Estate Capital Partners","Doron Sebbag","Douglas Colby","Downing Frames ","Dr. Avo Samuelian","Dr. Murray Abramson","Dr. Richard Katz","Dranoff Fine Art, INC","Drew Beattie","Drummond Framing","Duggal Visual Solutions","East Frames ","Ed Brown","Eduardo Martinez Campos","Edward J. Minskoff ","Edward Tyler Nahem Fine Art, L.L.C.","Ehrenkranz & Ehrenkranz LLP","Eileen Fazio","Elaine Chun","Eleanor Propp","Elena Coureau						","Eli Bronfman","Elissa deBrito","Elite Shelter Rock Arts","Elizabeth Bauer Design","Elizabeth Margulies Art Consulting","Elizabeth Peyton Studio","Elizabeth Roberts Architecture & Design","Elizabeth Urbanski","Ellen Kern Fine Arts","Ellen Taubman","Ellie Barnet","Elliott Rapaport","Elysa C. Goldman and Max Hannan","Embassy of Mongolia","Emily and Joshua Prince","Emily Fine","Emily Rath","Emily Zuch","EMS Capital LP","Equinox Hotel","ERAA I, LLC","Eric and Randi Sellinger","Eric Diefenbach","Eric Firestone Gallery","Erika Klauer ","Estelle Leeds","Etkin Gold Art Strategies","EVA PRESENHUBER","Evan Clark","Evan Yurman","Evans Investment Management","EWR (Newark Liberty International Airport)","Excelsior College","Extell Development","Eykyn Maclean, LP","Eytan Tigay","F. Alfredo Pellas Jr.","False Flag","Fergus McCaffrey","Ferrer","Fine Art Conservation Group LLC","Fisk FAS","Florence Griswold Museum","Fortress New York ","Fraenkel Gallery","Fralin Museum at UVA","Frames New York","Francesco Clemente Studio","French Arch LLC c/o M. Safra & Co., Inc.","frenchCALIFORNIA","Fresco Decorative Painting","Fritz Ewins ","Fujimura Contemporary","Fujimura Institute / International Arts Movement","Gabriela Skouloudi","Gagosian Gallery","Galerie Lelong","Galerie Maria Wettergren","Galleria Mattia De Luca","Gallery Wendi Norris","Gander & White ","Gareth Wessels","Garret Goldsmith","Gavin Brown - 49 MARKET STREET","Gavin Brown's Enterprise","Gayle Turk London","GEM NYC","GEODIS","George Condo Studio","GERALD BARAD","Gerald McCue","Gerardo B. Roses","Gilbert Harrison","Ginny Neel","GK Framing ","Gladstone Gallery","Gladys Chung","Glenn Dubin","Glenn Ligon Studio","Goodman Taft","Gould Art Advisory","Gracie Mansion Conservancy","Grade Purchasing","Greene Naftali Gallery","greengrassi","Greenhill & Co., LLC","Greenspon","Gregg Gelman","Grey Art Gallery, New York University","Griffin Editions","Grimm Gallery","GRIMSHAW","Guggenheim, Asher Associates ","Gund Collection","Gurr Johns, Inc.","GV Art Conservation ","H-MADE","Haas & Company AG","Hales New York","Half Gallery","Handmade Frames","HANGMAN","Hannah Hoffman Gallery","Harvard Art Museums","Harvard Countway Library","Harvard Kennedy School","Harvard University Graduate School of Design","Hauser & Wirth","Haven Art Group","Haynes-Roberts, Inc.","Heard Museum","Helen Bender","Helen Jessup","Henry Pincus","HFZ Capital Group","HG Contemporary ","High Art","Hilary Gabrieli","Hillary Legrain","Hirsch and Associates","Hirschl & Adler Modern","Hirshhorn Museum and Sculpture Garden","HISAO SHIRAGA","Hispanic Society Museum and Library","Home Studios","Hong Kong Gallery LTD","Hood Museum of Art, Dartmouth","Hope Sidman","Hourglass Advisory, LLC","House of Heydenryk","Howard Yezerski Gallery","Howtel Limited","HRY","Hudson River Museum","Hudson Yards / Hell's Kitchen Alliance","Hugh Hayden Studio","Hunter Dunbar Projects","Hyphen Advisory","Ida Applebroog","Ingrao","Institute of Contemporary Art Los Angeles","Institute of Contemporary Art, Boston","Institute of Fine Arts, New York University ","Integrated Project Delivery Partners, Inc.","International Freight Logistics LTD","Irene C. Papanestor Art Advisory LLC","Irene Papanestor","Iris and B. Gerald Cantor Art Gallery, College of the Holy Cross","Isabella Stewart Gardner Museum","Jack Hanley Gallery","Jack Heller ","Jack Shainman Gallery","Jackson Fine Art","Jacob and Kate Strumwasser","Jacques Grange Inc.","Jaime Frankfurt LLC","James and Chris Hays","James Cohan Gallery","James Fuentes Gallery","James Goodman Gallery","Jane Deland (Phil) ","Jane Dresner Sadaka","Jane Lombard Gallery","Jane Rose ","Jane Weldon","Janos Gat","Japan Society Gallery","Jason  Flom","Jason Jacques Gallery","Jason Smith","Jeanne Masel","Jeff and Felicia Bersh","Jeff and Kerry Strong","Jeff Koons LLC","Jeff Lincoln Art + Design","Jeffrey Feinstein","Jeffrey Longhenry","Jeffrey Sutton","Jen Rubio","Jenny Holzer Studio","Jeremy Kost","Jerry Frug","Jerry Garcia","Jesse Angelo","Jessica Jacobs","Jessie Ding","JFK International Airport","JKL Worldwide","Joanna Pousette-Dart","Joanne Tucker","Jody Yudkoff","Joe Bradley Studio","Joe Carlucci","Joelle Connolly Art Advisory","Johanna Liesbeth De Kooning Trust","John and Linda Gidwitz","John Auerbach ","John Chamberlain Estate","John Clement Studio","John Coles","John Currin Studio","John E Ellis","John Giorno Foundation","John Harrington","John Holodnak","Joleen Julis","Jonathan Locker","Jonathan Seeling","Jonny Cohen","Jose Garcia","Josh Trazoff ","Joshua Foulquier","Jozu LLC","JP Morgan Chase","JSE Projects LLC","JTT","Julia Kelly","Julie Leff","Julie Mehretu Studio","Julie Simmons","Julie Simpson","Julius Lowy Frame & Restoring Company ","Julius Lowy Frame and Restoring Company","Justin Patterson","KA Design Group","Kaikodo Gallery","Kalaman + Demetriou","Karen Revis","KARMA","Karyn Lovegrove Art Advisory","Kasmin Gallery ","Kate Rothko Prizel / Ilya Prizel","Kathy Ruttenberg","Katie Lydon Interiors","Katonah Museum of Art","kaufmann repetto","Kayne Griffin Corcoran","Kehinde Wiley Studio ","Keith Anderson","Keith Mayerson","Kele McComsey","Kemper Museum of Contemporary Art","Ken Kaminski","Kevin Moore","Kiley Ames","Kim Dickstein","Kim Heirston","Kim Manocherian","KMA Gems, LLC","Knotel Test","Kon Trubkovich Studio","Krakow Witkin Gallery","Kristen Benicasa","Kristen McGinnis","Kristina Horne","Kurian Frame & Display","kurimanzutto","Lark Mason Associates","Laumont Photographics","Laura Grigsby  Art Consulting","Laura Hovas Richman","Laura Manuel","Laura Pomerantz","Laura Schwalbe","Laura Solomon Fine Art","Lee Ann Jaffee","Leelee Kimmel","Leerform","Lehmann Maupin","Leila Straus","Leo Villareal Studio","Leon Polk Smith Estate","Leonard and Susan Feinstein ","LeRoy Neiman Foundation","Leslie Rankow Fine Arts","Let There Be Neon","Levien & Company Inc.","Levy Gorvy Gallery","Lew Allen Galleries","Lew Sanders","Liddy Berman","Liliane Tomasko Studio","Lily Fan","Lina Bertucci","Linda Kaufman","Linda Lindenbaum","Lindsi and Aaron Watts","Lisa & Barry Stoler","Lisa Donneson","Lisa Goldberg","Lisa Hamilton","Lisa Williams","Lisson Gallery","Liu Xiaodong Studio","Lizanne Merrill ","Lizzie Himmel","Locks Gallery","Loic Gouzer Dogtooth Intl","Loie Hollowell Studio","Lolita Cros","Lorna Simpson / Shewolf Studio LLC","Los Angeles County Museum of Art","Louise Laciny","Love Bird Projects","Luca Bonetti Corp.","Luhring Augustine","Luxembourg & Dayan","Luxembourg & Dayan London","Luxembourg Art Inc.","Lycée Français de New York","Lycourgos Tsirakis ","Lydia Shorenstein ","Lyor Cohen","M. Shanken Communications Inc","MacAndrews & Forbes Inc.","Madeleine Ekholm","Madeline Smoot","Mahnaz Collection ","Major Food Group","Mana Fine Arts","Manchester Historic Association","Maquette","Marc and Robin Wolpow","Marc Leder","Marc Selwyn Fine Art ","Marc Straus LLC","Marci Bleichmar","Marco Berrebi ","Marian Goodman Gallery","Marianne Boesky Gallery","Marie Hansen","Mariela Torres","Marina French","Marion Kahan","Marion/Art","Marissa Adele","Marissa Stokes Interior Design","Marissa Torres","Mark Berryman","Mark Brodsky","Mark Curley","Mark Dubrovsky","Mark Rothman","Mark Vassallo","MARKT Advisory","Marla Sabo ","Marlene and David Persky","Marlene Iglitzen","Marley B. Lewis","Marmol Radziner","Marron Art","Martha Lichtensteiger","Martin & Toni Sosnoff","Mary E. Frank","Mary Heilmann Studio","Mary Silver","Massimo De Carlo","Masterpiece ","Matteo Pasquali and Brooke Shawn","Matthew Day Jackson Studio LLC","Matthew Felton","Matthew Marks Gallery","Matthew Swift Gallery","MCA Chicago","McLarens","MDFG","Meckseper Studio","MediaLink","Melanie Nennig ","Melissa Brice","Mendes Wood DM","Meredith Palmer Gallery, Ltd","Metro Pictures","Mia Rowe","Michael Altman Fine Art","Michael and Shelley Carr","Michael Ayad","Michael Hess","Michael Rosenfeld Gallery LLC","Michael Schwarz","Michael Thom","Michael Werner Gallery","Michael Williams","Michele Shapiro","Michelle Yang","Michelle Yun & John Kwaak","Mignoni","Miguel Abreu Gallery","Miguel Saco Furniture & Restoration","Mika Rottenberg Studio","Mike & Sary Jordan","Mildred Lane Kemper Art Museum","Miles Bellamy","Miles McEnery Gallery","Milgo Bufkin ","Millburn Free Public Library ","Millburn Ridgefield Corporation","Milwaukee Art Museum","Minagawa Art Lines","Ministry of Education, Culture, Science and Sports, Mongolia","Minneapolis Institute of Art","MIT List Visual Arts Center","MIT Media Lab","MIT Museum","Miyako Yoshinaga Gallery","Mnuchin Gallery","moCa Cleveland","Modern Art Conservation ","Modern Art Museum of Fort Worth","Modernism Inc.","Modica Carr Art Advisory ","Moishe Beniaker","Molly Gochman","MoMA","MoMA Design Store","MoMA PS1","MoMA QNS","MORE Specialized Transport","Morgan Walker Fine Art","Morrison Hotel Gallery","Mortimer Zuckerman","Morton Janklow","Morven Museum & Garden","Mount Holyoke College Art Museum & Skinner Art Museum","Mr Keet LLC ","MSFA","Munib Islam","Musée des beaux-arts de Montréal","Museum & Library","Museum of Arts and Design","Museum of Contemporary Photography","Museum of Early Trandes and Crafts","Museum of Fine Arts, Boston","Museum of Modern Art","Museum of the City of New York","Museum of Wisconsin Art","Museum Textile Services","Museumpros Art Services","Naftali Group","Nahmad Contemporary","Nancy Chaikin","Nancy Graves Foundation","Nancy Josephson","Nanette Jarmain and Eugene Johns","Nars Cosmetics","Nate Lowman Studio","National Gallery of Art","Navin Thukkaram","Neda Rastegar","Nedra Matteucci Galleries","Neil & Shelly Mitchell ","Nelson-Atkins Museum of Art, The","Netflix","Neue Galerie","Neue House","New Haven Museum","New Museum","New Water Culture","New York Gallery","New York Public Library","New York University","New York University - College of Dentistry","New Yorker Arts","New-York Historical Society","Nicelle Beauchene Gallery","Nicholas Walsh","Nicola Vassell Gallery","Nicolas Party Studio","Nicole Eisenman Studio","Nicole Eloff","Nicole Zatlyn and Jason Weiner","Night Gallery","Noah Turkus","Nocturne Drive GmbH","Nora Wolszczuk","Nordic Watercolor Museum","North Island (c/o Glenn Hutchins)","Northeast Document Conservation Center","NSU Art Museum Fort Lauderdale","NYC Art Handlers","NYC Public Design Commission","NYPL - New York Public Library","NYU Stern School of Business","Oak Hill Advisors","Objects Conservation Studio","OCS Art Services","October Gallery","Odeon Decoration, LLC","Odyssey Art","Office of Linda & Arthur Carter","Ogunquit Museum of American Art","Ohlhausen DuBois Architects","Olessya Belovich ","Oliver Haarmann ","Olivia and Charlie Corwin","Olivia Douglas ","Olsen Gruin","Olsoff Fine Art","Olson Kundig","One57","OTI Fine Art Services","Oursler Studio","Over the Influence","PA Acquisitions (NY)LLC","Pace / MacGill Gallery","Pace Gallery","Pallavi Mehta","Paolo Vedovi","Para Site","Park Avenue Armory","Patricia Fast","Patricia Loeb","Patrick Monahan","Paula Cooper Gallery","Payal Chaudhri","Peabody Essex Museum","Period Furniture Conservation","Permanent Mission of South Africa to the United Nations","Permanent Mission of the United Arab Emirates to the United Nations","Pershing Square Capital Management, LP","Personal Risk Management Solutions, LLC","Peter Blum Gallery","Peter Doig","Peter Freeman Inc. ","Peter Galliaert","Peter Marino Architect","Peter Muscato","Peter Soros","Pettit Art Partners ","Petzel","PFA, Inc.","Phantom Designs","Philip Aarons","Philip Martin Gallery","Philippe Brutus ","Phillips ","Picrow Streaming, Inc. ","Pierre Yovanovitch","Pieter Schoolwerth","Pilgrim Hall Museum","PINTO ART","Piotr Uklanski Studio","Plaza Management USA LLC","Pocahontas + Zarathustra ","Pomeroy & Co., Inc.","Poppy Pulitzer ","Portland Museum of Art","Portsmouth Historical Society","Powerhouse Arts","PPOW","Pranayama Art","Primary Art Services","Prime Projects","Princeton University","PSG Framing","Quintessentially","QVT Financial LP","R & Company","R.W. Norton Art Gallery","Rachel Greene","Rachel Rudin","Rachel Uffner Gallery","Rachel Wilf","Raf Simons","Raffaella Cribiore","Raffini","Rahr Enterprises","Randall Parker - DO NOT USE","Raphael Castoriano","Rashid Johnson Studio","RASSELAS","Rebekah McCabe","Red Hook Crating ","Reena Spaulings","Regen Projects ","Regency Shipping Ltd","Registrars Group","Renay Freedman","Renee Harbers Liddell","Renwick Fine Art Services","Renzo Leonardi","RGJ Enterprises LLC.","RGJ Enterprises, LLC.  ","Riccardo Gianni","Richard Avedon Foundation","Richard Carr Jr.","Richard Feinstein ","Richard Gray Gallery","Richard Ohebshalom","Richard Polsky","Richard Prince Studio","Richard Rieger","Richard Roth","Richard T Hellmuth","Richard Ziello Framing","RISD Museum","Rita Ackermann","Roaring Fork Fine Arts","Robert Koppelman ","Robert Lauder ","Robert Mangold ","Robert Sati","Roberto Cappuccio","Roger Anthony","Rohit Shah","Ron & Debbie Eisenberg","Ron Lessard","Ronald Cohen","Ronald Danko Jr.","Rooq Framing ","Rose Art Museum","Rosenwald-Wolf Gallery","Ross Rodrigues","Royal Ontario Museum","Rubenstein PR","Rudolf Stingel Studio","Rutgers University Newark","Ruth Catone","RxArt","S.A. Art Conservation ","Sage Realty Corporation","Saira Lal","Sally & Tony Mann","Salon 94","Sam Ben-Avraham","Sam Orlofsky","Sam Plimpton","Sam Trower","Samantha and James David","Samuel Waksal","Samuels Creative + Co.","Sanae Ishikawa","Sandy Smith","Santa Monica Museum dba Institute of Contemporary Art, LA","Sara Arno","Sarah Cone ","Sarah Nunberg","Sarah Sze Studio ","SAT","SCAD Museum of Art","Schiff Fine Art","Scientific Analysis of Fine Art SAFA","Scott Gerson ","SculptureCenter","Sean Kelly New York","Sean Levine","Sean Scully Studio","Seaport Hotel","Sebastian Rissmann","Sebastian Sobczak","Sebastien Gobbi","Segalot LP","Seoul Auction Blue","Serene Azar","Sergio Teixeira","SERVPRO of Midtown Manhattan","Seth Price Studio","Seth Rosen","Seung Kim","SFMoMA","Shawna Gallancy","Shearburn","Shelton Mindel","Sherry Bronfman","Shilpa Sanger","Ship Art International","Sikkema Jenkins & Co","Silhouette Group","Silver Lining Inc.","Simon Lee","Simon Liu","Simon Parkes Art Conservation","Simone Battisti","Simone Leigh Studio","Simone Rocha","Simone Subal","Simrin Choudhrie","Sinan Uzan","Situ","Skarstedt Gallery","Skyframe & Display","SMAC Gallery","Sojourner Truth Parsons Studio","Sokoloff + Associates","Solomon R. Guggenheim Museum","Sonia Attkiss","Sophocles Zoullas","SOS Flexible ","Sotheby's","Soze Productions, Inc","Spencer Finch Studio","Sperone Westwater ","Splitrock Estate Management","Springfield Museums","Sprüth Magers","SRI","Stanley Whitney Studio","STARDUST","Starfire Storage","Stefan Coman","Stephanie Bernheim","Stephen Finkelstein","Steve Zamsky","Steven Amedee Inc.","Steven Rattner ","Straus Art Group","Studio Bonafide","Studio Frazar","Studio kg","Studio Museum in Harlem","Susan Almrud","Susan Bay-Nimoy","Susan Bram","Susan Chapman","Susan Kilkenny","Susheel Kirpalani","Sustainable Insight Capital Management","Sven Borho","Swann Auction Galleries","Swiss Institute ","Tad Wiley","Tangent Art","Tangent Contemporary Art","Tanya Bonakdar Gallery","Tara Donovan Studio","Tatti Conservation ","Team Enterprises","Tefken Ventures","Temple Emanu-El","Teneo","test","Test Transit","testMay2021","The Andy Warhol Museum","The Baltimore Museum of Art","The Better Image ","The Block Museum of Art","The Broad ","The Cappiello","The Cathedral of St. John the Divine","The Corporation of Yaddo","The Crosby Company of New Hampshire","The Dana Foundation","The Davis Museum at Wellesley College","The Eric Carle Museum of Picture Book Art","The Estate of Devra Freelander","The Frick Collection ","The Heller Group, LLC","The ICON Group","The Jewish Museum","The Kitchen","The Lagasse Group","The Menil Collection","The Metropolitan Museum of Art","The Mohn Family Trust","THE MUSEUM OF CONTEMPORARY ART","The Museum of Fine Arts, Houston","The Newark Museum of Art","The Objects Conservation","The Registrars Group, LLC","The Related Companies, L.P.","The Row","The Shed","The Willem de Kooning Foundation","Theorem^3 Advisors","Thomas Gibson Fine Art","Thomas Nozkowski ","Thomas Rom","Thomas W Chapman","Thomas Welch","Tibor De Nagy Gallery","Tiffany Andre","Tilton Gallery","Timothy Taylor","Titus Kaphar Studio","Todd Bourret","Todologistics","Tom and Fotene Coté","Tom Kim","Tom Wesselmann Estate","Tong Art Advisory","Tony Bechara","Town of Watertown","TPG Global, LLC","Tracey G. Riese","Transcon","Transport Consultants International Inc.","Trimaxion Fine Arts ","Trudy Cohen","Trudy Roberts","Tufts University Art Galleries","Tufts University Art Gallery","Turner North Center Productions, Inc","Twenty First Gallery","Two Palms","U.S Art Company, Inc.","UAP","Ugo Rondinone Studio","UNA Art Logistics","Unframed USA","United Rentals","Universal Television LLC \"Law & Order: Organized Crime\"","UOVO ","Uprise Art ","Uri Aran","Valerie Name Studio","Van Doren Waxter","Various Small Fires","Venus Over Manhattan","Victor Michael Perretta","Victoria Burge","Victoria Hagan Interiors","Victoria-Miro","Vielmetter Los Angeles ","Viktoria Schrager","Vivian Horan Fine Art","Vivien and Alan Hassenfeld","Vladimir Restoin Roitfeld","VMS","W. Don Cornwell","W2005 / Hines West Fifty-Third Realty, LLC","Wadsworth Atheneum","Waldo Abbot","Wallach Art Gallery","Walter Price Studio ","Warren & Mitiz Eisenberg","Weber Fine Art Greenwich","Weiss Turkus Projects","Wellesley College","Welpak","Wendy Hoffman","Wendy Shenfeld","WeWork","White Columns","White Cube","White Fire","Whitney Museum of American Art","Whoopi Goldberg ","Whryta Contemporary Art Conservation","William and Ellen Taubman","William Holodnak","William Hult","William Langhorne","William Susman and Emily Glasser","Williams & Hill ","Wilson Conservation, LLC","Winston Art Group","Worcester Art Museum","Workshop Fine Art","Worth Art Advisory, LLC","X-dock // MQT Matsil","Xavier Hufkens","Y.Z. Kami Studio","Yale Center for British Art","Yale Law School","Yale University Art Gallery","Yamaoka Studio","Yancey Richardson Gallery ","Yariv Elbaz","Yossi Milo ","YSDS","YUN Architecture","Zach Lieberman","Zachary Yudkoff","Ziello Inc.","Zoe Leonard Studio"];
+        select = function() {
+            var returnstring = '';
+            text.forEach((x, i) => returnstring += "<option value='" + x + "'>");
+            return "<datalist id='clients'>" + returnstring + "</datalist>";
+        }();
+    $(this).empty();
+   parent.append(select);
+});
+}
+
+function addRow(row){
+  console.log(row);
+  dt.row.add($(row)).draw();
+  show_client();
+  //dt.ajax.reload();
+}
+
+$(document).on('blur', '#dropdownClient', function() {
+var id = $(this).closest('tr').find('#assetID').text();
+var dropClient = $(this).closest('tr').find('#dropdownClient').val();
+console.log(dropClient);
+var param = {
+          action: 'Subact',
+          dropClient:dropClient,
+          id: id
+      }
+      var info = JSON.stringify(param);
+      FileMaker.PerformScript('wv_DataTables', info);
+  });
+
+function addSubact(css,val){
+ $(css).html(val);
+}
+</script>
+</html>

@@ -166,8 +166,9 @@ var param = {
       }
       var info = JSON.stringify(param);
       FileMaker.PerformScript('wv_DataTables', info);
-
-  $(this).parents('tr').remove();
+	
+//changed to use the native dt .remove() func, need draw() to show the changes
+  dt.row ($(this).parents('tr')).remove().draw();
 });
 
 //event listener
